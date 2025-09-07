@@ -2,385 +2,180 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>College Notice Board (Frontend Demo)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Notice Board</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* small custom styles */
-        .card-line-clamp {
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(6px);
-        }
-
-        .dark .glass {
-            background: rgba(30, 30, 30, 0.55);
+        body {
+            font-family: 'Outfit', 'ui-sans-serif', 'system-ui'
         }
     </style>
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300">
-    <div class="max-w-6xl mx-auto p-4">
-        <!-- Header -->
-        <header class="flex items-center justify-between gap-4">
-            <div>
-                <h1 class="text-2xl font-bold">📢 College Notice Board</h1>
-                <p class="text-sm text-gray-600 dark:text-gray-300">Centralized notices — demo using HTML + TailwindCSS
-                    + JavaScript (localStorage)</p>
-            </div>
-            <div class="flex items-center gap-2">
-                <button id="toggleDark" class="px-3 py-2 rounded-md bg-white dark:bg-gray-800 shadow-sm">Toggle
-                    Dark</button>
-                <button id="openAdmin" class="px-3 py-2 rounded-md bg-indigo-600 text-white">+ Add Notice</button>
-            </div>
-        </header>
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-        <!-- Controls -->
-        <section class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
-            <input id="searchInput" type="search" placeholder="Search notices, titles, description..."
-                class="p-2 rounded-md shadow-sm glass" />
-            <select id="deptFilter" class="p-2 rounded-md shadow-sm glass">
-                <option value="all">All Departments</option>
-                <option value="All">All</option>
-                <option value="IT">IT</option>
-                <option value="CS">CS</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Civil">Civil</option>
-                <option value="Admin">Admin</option>
-            </select>
-            <select id="sortSelect" class="p-2 rounded-md shadow-sm glass">
-                <option value="newest">Sort: Newest</option>
-                <option value="oldest">Sort: Oldest</option>
-            </select>
-        </section>
+    <!-- NAVBAR -->
+    <nav class="bg-indigo-600 text-white sticky top-0 z-50 shadow">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">College Notice Board</h1>
+            <div class="hidden md:flex gap-6 text-sm font-medium">
+                <a href="#pinned" class="hover:text-gray-200">Pinned</a>
+                <a href="#all" class="hover:text-gray-200">All Notices</a>
+                <a href="#archive" class="hover:text-gray-200">Archive</a>
+                <a href="#add-notice" class="hover:text-gray-200">Add Notice</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="max-w-6xl mx-auto px-6 py-16 text-center">
+        <h2 class="text-4xl md:text-5xl font-extrabold leading-tight">
+            Manage <span class="text-indigo-600">College Notices</span><br />
+            Stay Updated, Stay Ahead
+        </h2>
+        <p class="mt-4 text-lg text-gray-700">
+            A centralized portal to view pinned notices, announcements and archives.
+        </p>
+        <div class="mt-6 flex justify-center gap-4">
+            <a href="#pinned" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow">View
+                Pinned</a>
+            <a href="#all" class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg shadow">All
+                Notices</a>
+            <a href="#archive" class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg shadow">Archive</a>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
 
         <!-- Pinned Notices -->
-        <section class="mt-6">
-            <h2 class="text-lg font-semibold">📌 Pinned Notices</h2>
-            <div id="pinnedContainer" class="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <section id="pinned" class="mb-12">
+            <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Pinned Notices</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Example pinned notice -->
+                <article class="p-4 bg-white rounded-lg shadow hover:shadow-md transition">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold">Exam Schedule Released</h3>
+                            <p class="text-xs text-gray-500">IT • 2025-09-10</p>
+                        </div>
+                        <div class="flex gap-1">
+                            <button class="px-2 py-1 text-xs rounded bg-yellow-400">Pinned</button>
+                            <button class="px-2 py-1 text-xs rounded bg-indigo-600 text-white">Edit</button>
+                            <button class="px-2 py-1 text-xs rounded bg-gray-300">Archive</button>
+                            <button class="px-2 py-1 text-xs rounded bg-red-500 text-white">Del</button>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-sm text-gray-700">Semester exam timetable for B.Sc IT students is released.</p>
+                </article>
+            </div>
         </section>
 
         <!-- All Notices -->
-        <section class="mt-6">
-            <h2 class="text-lg font-semibold">📰 All Notices</h2>
-            <div id="noticesContainer" class="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <section id="all" class="mb-12">
+            <h2 class="text-2xl font-semibold text-indigo-700 mb-4">All Notices</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Example all notice -->
+                <article class="p-4 bg-white rounded-lg shadow hover:shadow-md transition">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold">Guest Lecture on Web Dev</h3>
+                            <p class="text-xs text-gray-500">CS • 2025-09-15</p>
+                        </div>
+                        <div class="flex gap-1">
+                            <button class="px-2 py-1 text-xs rounded bg-gray-200">Pin</button>
+                            <button class="px-2 py-1 text-xs rounded bg-indigo-600 text-white">Edit</button>
+                            <button class="px-2 py-1 text-xs rounded bg-gray-300">Archive</button>
+                            <button class="px-2 py-1 text-xs rounded bg-red-500 text-white">Del</button>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-sm text-gray-700">Seminar on Modern Web Development on 15 Sept at 11 AM in
+                        Auditorium.</p>
+                </article>
+            </div>
         </section>
 
         <!-- Archive -->
-        <section class="mt-6">
-            <details class="group">
-                <summary class="cursor-pointer text-sm text-gray-600 dark:text-gray-300">Archive (click to expand)
-                </summary>
-                <div id="archiveContainer" class="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-            </details>
+        <section id="archive" class="mb-12">
+            <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Archive</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Example archive notice -->
+                <article class="p-4 bg-gray-50 rounded-lg shadow hover:shadow-md transition">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold">Old Cultural Fest Notice</h3>
+                            <p class="text-xs text-gray-500">Admin • 2024-11-20</p>
+                        </div>
+                        <div class="flex gap-1">
+                            <button class="px-2 py-1 text-xs rounded bg-green-500 text-white">Restore</button>
+                            <button class="px-2 py-1 text-xs rounded bg-red-500 text-white">Delete</button>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-sm text-gray-700">Last year’s cultural fest announcement moved to archive.</p>
+                </article>
+            </div>
         </section>
 
-        <!-- Footer actions -->
-        <div class="mt-6 flex gap-2">
-            <button id="clearAll" class="px-3 py-2 rounded-md bg-red-500 text-white">Clear All Notices</button>
-            <button id="exportBtn" class="px-3 py-2 rounded-md bg-green-500 text-white">Export JSON</button>
-            <label class="px-3 py-2 rounded-md bg-gray-200 dark:bg-gray-700 cursor-pointer">
-                Import JSON <input id="importFile" type="file" accept="application/json" class="hidden" />
-            </label>
-        </div>
-
-    </div>
-
-    <!-- Admin Modal (simple) -->
-    <div id="adminModal" class="fixed inset-0 flex items-center justify-center bg-black/40 hidden z-50">
-        <form id="noticeForm" class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-xl shadow-lg">
-            <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold">Add / Edit Notice</h3>
-                <button type="button" id="closeAdmin" class="text-gray-500">✖</button>
-            </div>
-
-            <div class="mt-4 grid grid-cols-1 gap-3">
-                <input id="title" placeholder="Title (eg: Exam Schedule)" required class="p-2 rounded-md glass" />
-                <textarea id="description" rows="4" placeholder="Full description" required
-                    class="p-2 rounded-md glass"></textarea>
-                <div class="flex gap-2">
-                    <select id="department" class="p-2 rounded-md glass flex-1">
-                        <option value="All">All</option>
-                        <option value="IT">IT</option>
-                        <option value="CS">CS</option>
-                        <option value="Mechanical">Mechanical</option>
-                        <option value="Electrical">Electrical</option>
-                        <option value="Civil">Civil</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                    <input id="date" type="date" class="p-2 rounded-md glass" />
+        <!-- ADD NOTICE FORM -->
+        <section id="add-notice" class="mb-12">
+            <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Add New Notice</h2>
+            <form class="bg-white p-6 rounded-lg shadow max-w-3xl mx-auto space-y-4">
+                <!-- Title -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Notice Title</label>
+                    <input type="text" placeholder="Enter notice title"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200" />
                 </div>
-                <label class="flex items-center gap-2"><input id="isImportant" type="checkbox" class="h-4 w-4" /> Mark
-                    as Important</label>
-            </div>
 
-            <div class="mt-4 flex justify-end gap-2">
-                <button type="button" id="saveNotice"
-                    class="px-4 py-2 rounded-md bg-indigo-600 text-white">Save</button>
-            </div>
-        </form>
-    </div>
+                <!-- Description -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea rows="3" placeholder="Enter notice details"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"></textarea>
+                </div>
 
-    <script>
-        // Simple Notice Board Demo using localStorage
-        const STORAGE_KEY = 'college_notices_v1';
+                <!-- Category + Date -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Category</label>
+                        <select
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                            <option>IT</option>
+                            <option>CS</option>
+                            <option>Admin</option>
+                            <option>General</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Date</label>
+                        <input type="date"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200" />
+                    </div>
+                </div>
 
-        let state = { notices: [], archive: [] };
+                <!-- Buttons -->
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="reset"
+                        class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md shadow">Reset</button>
+                    <button type="submit"
+                        class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md shadow">Add
+                        Notice</button>
+                </div>
+            </form>
+        </section>
 
-        // Elements
-        const adminModal = document.getElementById('adminModal');
-        const openAdmin = document.getElementById('openAdmin');
-        const closeAdmin = document.getElementById('closeAdmin');
-        const noticeForm = document.getElementById('noticeForm');
-        const titleIn = document.getElementById('title');
-        const descIn = document.getElementById('description');
-        const deptIn = document.getElementById('department');
-        const dateIn = document.getElementById('date');
-        const importantIn = document.getElementById('isImportant');
-        const saveNoticeBtn = document.getElementById('saveNotice');
-        const pinnedContainer = document.getElementById('pinnedContainer');
-        const noticesContainer = document.getElementById('noticesContainer');
-        const archiveContainer = document.getElementById('archiveContainer');
-        const searchInput = document.getElementById('searchInput');
-        const deptFilter = document.getElementById('deptFilter');
-        const sortSelect = document.getElementById('sortSelect');
-        const toggleDark = document.getElementById('toggleDark');
-        const clearAllBtn = document.getElementById('clearAll');
-        const exportBtn = document.getElementById('exportBtn');
-        const importFile = document.getElementById('importFile');
+    </main>
 
-        let editId = null; // for editing
+    <!-- FOOTER -->
+    <footer class="bg-gray-200 py-6 text-center text-sm text-gray-600">
+        Built with ❤️ by <span class="font-semibold">Dhuka Mohammad - Full Stack Developer</span>
+    </footer>
 
-        // Utils
-        function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
-        function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-        function loadState() {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            if (raw) {
-                try { state = JSON.parse(raw); }
-                catch (e) { state = { notices: [], archive: [] }; }
-            }
-        }
-
-        // Render
-        function render() {
-            // apply filters
-            const q = searchInput.value.trim().toLowerCase();
-            const dept = deptFilter.value;
-            const sort = sortSelect.value;
-
-            const notices = [...state.notices];
-            // pinned first in their own list
-            const pinned = notices.filter(n => n.pinned).sort((a, b) => new Date(b.created) - new Date(a.created));
-            const others = notices.filter(n => !n.pinned);
-
-            const applyFilter = arr => arr.filter(n => {
-                if (dept && dept !== 'all' && dept !== 'All' && dept !== n.department) return false;
-                if (q && !(n.title.toLowerCase() + n.description.toLowerCase()).includes(q)) return false;
-                return true;
-            });
-
-            const sortFunc = (a, b) => sort === 'newest' ? new Date(b.created) - new Date(a.created) : new Date(a.created) - new Date(b.created);
-
-            // Pinned
-            pinnedContainer.innerHTML = '';
-            applyFilter(pinned).sort(sortFunc).forEach(n => pinnedContainer.appendChild(createCard(n)));
-
-            // Others
-            noticesContainer.innerHTML = '';
-            applyFilter(others).sort(sortFunc).forEach(n => noticesContainer.appendChild(createCard(n)));
-
-            // Archive
-            archiveContainer.innerHTML = '';
-            state.archive.slice().sort((a, b) => new Date(b.created) - new Date(a.created)).forEach(n => archiveContainer.appendChild(createArchiveCard(n)));
-        }
-
-        function createCard(n) {
-            const card = document.createElement('article');
-            card.className = 'p-4 rounded-lg shadow-sm bg-white dark:bg-gray-800';
-            card.innerHTML = `
-    <div class="flex items-start justify-between gap-2">
-      <div>
-        <div class="flex items-center gap-2">
-          <h3 class="font-semibold">${escapeHTML(n.title)}</h3>
-          <span class="text-xs px-2 py-0.5 rounded ${n.important ? 'bg-red-100 text-red-700 dark:bg-red-800/40' : 'bg-gray-100 text-gray-600 dark:bg-gray-700/40'}">${escapeHTML(n.department)}</span>
-        </div>
-        <p class="text-xs text-gray-500 dark:text-gray-400">${n.date ? n.date : formatDate(n.created)}</p>
-      </div>
-      <div class="flex gap-1">
-        <button data-id="${n.id}" class="pinBtn px-2 py-1 text-sm rounded ${n.pinned ? 'bg-yellow-400' : 'bg-gray-200 dark:bg-gray-700/40'}">${n.pinned ? 'Pinned' : 'Pin'}</button>
-        <button data-id="${n.id}" class="editBtn px-2 py-1 text-sm rounded bg-indigo-600 text-white">Edit</button>
-        <button data-id="${n.id}" class="archiveBtn px-2 py-1 text-sm rounded bg-gray-300">Archive</button>
-        <button data-id="${n.id}" class="delBtn px-2 py-1 text-sm rounded bg-red-500 text-white">Del</button>
-      </div>
-    </div>
-    <p class="mt-3 text-sm text-gray-700 dark:text-gray-200 card-line-clamp">${escapeHTML(n.description)}</p>
-  `;
-
-            // attach listeners
-            card.querySelector('.pinBtn').addEventListener('click', () => togglePin(n.id));
-            card.querySelector('.editBtn').addEventListener('click', () => openEdit(n.id));
-            card.querySelector('.archiveBtn').addEventListener('click', () => archiveNotice(n.id));
-            card.querySelector('.delBtn').addEventListener('click', () => deleteNotice(n.id));
-
-            return card;
-        }
-
-        function createArchiveCard(n) {
-            const card = document.createElement('article');
-            card.className = 'p-4 rounded-lg shadow-sm bg-gray-50 dark:bg-gray-800/60';
-            card.innerHTML = `
-    <div class="flex items-start justify-between gap-2">
-      <div>
-        <h3 class="font-semibold">${escapeHTML(n.title)}</h3>
-        <p class="text-xs text-gray-500 dark:text-gray-400">${n.department} • ${formatDate(n.created)}</p>
-      </div>
-      <div class="flex gap-1">
-        <button data-id="${n.id}" class="restoreBtn px-2 py-1 text-sm rounded bg-green-500 text-white">Restore</button>
-        <button data-id="${n.id}" class="delArchBtn px-2 py-1 text-sm rounded bg-red-500 text-white">Delete</button>
-      </div>
-    </div>
-    <p class="mt-3 text-sm text-gray-700 dark:text-gray-200 card-line-clamp">${escapeHTML(n.description)}</p>
-  `;
-            card.querySelector('.restoreBtn').addEventListener('click', () => restoreFromArchive(n.id));
-            card.querySelector('.delArchBtn').addEventListener('click', () => deleteFromArchive(n.id));
-            return card;
-        }
-
-        // Actions
-        function addNotice(data) {
-            state.notices.unshift(data);
-            saveState();
-            render();
-        }
-
-        function togglePin(id) {
-            state.notices = state.notices.map(n => n.id === id ? { ...n, pinned: !n.pinned } : n);
-            saveState(); render();
-        }
-
-        function openEdit(id) {
-            const n = state.notices.find(x => x.id === id);
-            if (!n) return;
-            editId = id;
-            titleIn.value = n.title; descIn.value = n.description; deptIn.value = n.department || 'All'; dateIn.value = n.date || '';
-            importantIn.checked = !!n.important;
-            adminModal.classList.remove('hidden');
-        }
-
-        function archiveNotice(id) {
-            const idx = state.notices.findIndex(n => n.id === id);
-            if (idx === -1) return;
-            const [item] = state.notices.splice(idx, 1);
-            state.archive.unshift(item);
-            saveState(); render();
-        }
-
-        function restoreFromArchive(id) {
-            const idx = state.archive.findIndex(n => n.id === id);
-            if (idx === -1) return;
-            const [item] = state.archive.splice(idx, 1);
-            state.notices.unshift(item);
-            saveState(); render();
-        }
-
-        function deleteFromArchive(id) {
-            state.archive = state.archive.filter(n => n.id !== id);
-            saveState(); render();
-        }
-
-        function deleteNotice(id) {
-            if (!confirm('Delete this notice?')) return;
-            state.notices = state.notices.filter(n => n.id !== id);
-            saveState(); render();
-        }
-
-        // Form handlers
-        openAdmin.addEventListener('click', () => { editId = null; titleIn.value = ''; descIn.value = ''; deptIn.value = 'All'; dateIn.value = ''; importantIn.checked = false; adminModal.classList.remove('hidden'); });
-        closeAdmin.addEventListener('click', () => adminModal.classList.add('hidden'));
-        noticeForm.addEventListener('submit', e => e.preventDefault());
-
-        saveNoticeBtn.addEventListener('click', () => {
-            const title = titleIn.value.trim();
-            const desc = descIn.value.trim();
-            const department = deptIn.value;
-            const date = dateIn.value;
-            const important = importantIn.checked;
-            if (!title || !desc) { alert('Please fill title and description'); return; }
-
-            if (editId) {
-                state.notices = state.notices.map(n => n.id === editId ? { ...n, title, description: desc, department, date, important } : n);
-                editId = null;
-            } else {
-                addNotice({ id: uid(), title, description: desc, department, date, important, pinned: false, created: new Date().toISOString() });
-            }
-            saveState(); adminModal.classList.add('hidden'); render();
-        });
-
-        // Controls
-        searchInput.addEventListener('input', render);
-        deptFilter.addEventListener('change', render);
-        sortSelect.addEventListener('change', render);
-
-        // Dark mode toggle
-        function isDark() { return document.documentElement.classList.contains('dark'); }
-        toggleDark.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('nb_dark', isDark());
-        });
-        // load dark pref
-        if (localStorage.getItem('nb_dark') === 'true') document.documentElement.classList.add('dark');
-
-        // Clear all
-        clearAllBtn.addEventListener('click', () => {
-            if (!confirm('Clear all notices and archive?')) return;
-            state = { notices: [], archive: [] };
-            saveState(); render();
-        });
-
-        // Export/Import
-        exportBtn.addEventListener('click', () => {
-            const dataStr = JSON.stringify(state, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a'); a.href = url; a.download = 'notices-export.json'; a.click(); URL.revokeObjectURL(url);
-        });
-        importFile.addEventListener('change', () => {
-            const file = importFile.files[0]; if (!file) return;
-            const reader = new FileReader();
-            reader.onload = e => {
-                try { const imported = JSON.parse(e.target.result); if (imported.notices && Array.isArray(imported.notices)) { state = imported; saveState(); render(); alert('Imported successfully'); } else alert('Invalid JSON format'); }
-                catch (err) { alert('Invalid JSON'); }
-            };
-            reader.readAsText(file);
-        });
-
-        // Helpers
-        function formatDate(s) { const d = new Date(s); return d.toLocaleDateString(); }
-        function escapeHTML(s) { return (s + '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;'); }
-
-        // Init
-        loadState(); render();
-
-        // Sample demo notices if empty
-        if (state.notices.length === 0 && state.archive.length === 0) {
-            state.notices.push(
-                { id: uid(), title: 'Exam Schedule Released', description: 'Semester exam timetable for all B.Sc IT students is released. Check department notice board for subject-wise timings.', department: 'IT', date: '', important: true, pinned: true, created: new Date().toISOString() },
-                { id: uid(), title: 'Guest Lecture on Web Dev', description: 'Join the seminar on Modern Web Development by industry expert on 15 Sept at 11 AM in Auditorium.', department: 'CS', date: '2025-09-15', important: false, pinned: false, created: new Date().toISOString() },
-                { id: uid(), title: 'Library Closed', description: 'Library will be closed on 02 Oct due to maintenance.', department: 'All', date: '2025-10-02', important: false, pinned: false, created: new Date().toISOString() }
-            );
-            saveState(); render();
-        }
-
-    </script>
 </body>
 
 </html>
