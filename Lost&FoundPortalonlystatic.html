@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>College Lost & Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Outfit', 'ui-sans-serif', 'system-ui'
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <!-- NAVBAR -->
+    <nav class="bg-gradient-to-r from-indigo-600 to-emerald-500 text-white">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-bold text-lg">College Lost & Found</h1>
+            <a href="#portal" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-md">Go to Portal</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="max-w-6xl mx-auto px-6 py-16 text-center">
+        <h2 class="text-4xl md:text-5xl font-extrabold leading-tight">
+            Lost something? Found something?<br />
+            <span class="text-indigo-600">Report & Recover here.</span>
+        </h2>
+        <p class="mt-4 text-lg text-gray-700">A simple Lost & Found portal design for your college.</p>
+        <div class="mt-6">
+            <a href="#portal" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow">Open
+                Portal</a>
+        </div>
+    </header>
+
+    <!-- PORTAL -->
+    <section id="portal" class="max-w-6xl mx-auto px-6 py-12">
+        <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+            <h2 class="text-2xl font-semibold">Lost & Found Portal</h2>
+            <div class="flex gap-3 flex-wrap">
+                <input type="search" placeholder="Search..." class="p-2 rounded-md border w-64" />
+                <select class="p-2 rounded-md border">
+                    <option>All Categories</option>
+                    <option>ID</option>
+                    <option>Electronics</option>
+                    <option>Stationery</option>
+                </select>
+                <select class="p-2 rounded-md border">
+                    <option>All</option>
+                    <option>Lost</option>
+                    <option>Found</option>
+                    <option>Resolved</option>
+                </select>
+                <button class="px-4 py-2 rounded bg-indigo-600 text-white">+ Report</button>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- FORM -->
+            <aside class="md:col-span-1">
+                <div class="p-4 rounded-xl bg-white shadow">
+                    <h3 class="font-semibold">Quick Report</h3>
+                    <form class="mt-4 space-y-3">
+                        <select class="w-full p-2 rounded-md border">
+                            <option>Lost</option>
+                            <option>Found</option>
+                        </select>
+                        <input placeholder="Title" class="w-full p-2 rounded-md border" />
+                        <select class="w-full p-2 rounded-md border">
+                            <option>Electronics</option>
+                            <option>ID</option>
+                            <option>Books</option>
+                            <option>Other</option>
+                        </select>
+                        <input type="date" class="w-full p-2 rounded-md border" />
+                        <textarea rows="3" placeholder="Details..." class="w-full p-2 rounded-md border"></textarea>
+                        <input placeholder="Contact info" class="w-full p-2 rounded-md border" />
+                        <input type="file" class="w-full text-sm" />
+                        <button class="w-full py-2 bg-emerald-500 text-white rounded">Submit</button>
+                    </form>
+                </div>
+            </aside>
+
+            <!-- CARDS -->
+            <!-- Lost Card -->
+            <div class="relative group p-4 rounded-xl bg-white shadow h-[55%]">
+                <img src="https://dummyimage.com/400x200/7C3AED/FFFFFF&text=Collage+ID+Card"
+                    class="rounded-md mb-3 w-full h-40 object-cover" />
+
+                <!-- Hover Actions -->
+                <div class="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition">
+                    <button class="px-3 py-1 bg-red-500 text-white rounded-full text-lg">🗑</button>
+                    <button class="px-3 py-1 bg-green-500 text-white rounded-full text-lg">✔</button>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <span class="px-2 py-1 text-xs bg-red-100 text-red-700 rounded">Lost</span>
+                    <span class="text-xs text-gray-500">ID Card</span>
+                </div>
+                <h4 class="mt-2 font-semibold">Lost: College ID Card</h4>
+                <p class="text-sm text-gray-600 mt-2">Lost near library yesterday. Contact: +91 XXXXXXX</p>
+            </div>
+
+            <!-- Found Card -->
+            <div class="relative group p-4 rounded-xl bg-white shadow h-[55%]">
+                <img src="https://dummyimage.com/400x200/10B981/FFFFFF&text=Black+Calculator"
+                    class="rounded-md mb-3 w-full h-40 object-cover" />
+
+                <!-- Hover Actions -->
+                <div class="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition">
+                    <button class="px-3 py-1 bg-red-500 text-white rounded-full text-lg">🗑</button>
+                    <button class="px-3 py-1 bg-green-500 text-white rounded-full text-lg">✔</button>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <span class="px-2 py-1 text-xs bg-green-100 text-green-700 rounded">Found</span>
+                    <span class="text-xs text-gray-500">Electronics</span>
+                </div>
+                <h4 class="mt-2 font-semibold">Found: Black Calculator</h4>
+                <p class="text-sm text-gray-600 mt-2">Found in classroom 202. Contact: abc@college.edu</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESOLVED -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+        <h3 class="text-xl font-semibold mb-4">Resolved Items</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+            <div class="p-3 rounded bg-gray-100">✔ Wallet returned</div>
+            <div class="p-3 rounded bg-gray-100">✔ ID Card resolved</div>
+            <div class="p-3 rounded bg-gray-100">✔ Notebook given back</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 bg-gray-200 text-center text-sm text-gray-600">
+        Alright Resolve — Dhuka Mohammad, Full Stack Developer
+    </footer>
+</body>
+
+</html>

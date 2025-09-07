@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>College Exam Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav {
+            background: #34495e;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            margin: 15px auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 800px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f4f4f4;
+        }
+
+        input,
+        textarea,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #2980b9;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f6391;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>College Exam Project Portal</h1>
+        <p>Simple Website for Project Development</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#dates">Important Dates</a>
+        <a href="#projects">Projects</a>
+        <a href="#submit">Submit</a>
+    </nav>
+
+    <section id="about">
+        <div class="card">
+            <h2>About the Project</h2>
+            <p>This portal is for students to manage and submit their college exam projects. You can check deadlines,
+                see projects, and submit your final work here.</p>
+        </div>
+    </section>
+
+    <section id="dates">
+        <div class="card">
+            <h2>Important Dates</h2>
+            <ul>
+                <li>Proposal Submission - <b>Sep 20</b></li>
+                <li>Design Review - <b>Oct 10</b></li>
+                <li>Mid-Term Demo - <b>Nov 15</b></li>
+                <li>Final Report & Viva - <b>Dec 05</b></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="card">
+            <h2>Project List</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Team</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td>Smart Attendance System</td>
+                    <td>Team Alpha</td>
+                    <td>In Progress</td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>Campus Shuttle Tracker</td>
+                    <td>Team Beta</td>
+                    <td>Submitted</td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>Plant Disease Detector</td>
+                    <td>Team Green</td>
+                    <td>Approved</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="submit">
+        <div class="card">
+            <h2>Submit Your Project</h2>
+            <form>
+                <label>Team Leader Name</label>
+                <input type="text" placeholder="Enter your name" required>
+
+                <label>Email</label>
+                <input type="email" placeholder="Enter your email" required>
+
+                <label>Project Title</label>
+                <input type="text" placeholder="Enter project title" required>
+
+                <label>Description</label>
+                <textarea placeholder="Brief description..." required></textarea>
+
+                <button type="submit">Submit Project</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Your College - Project Development Portal</p>
+    </footer>
+
+</body>
+
+</html>

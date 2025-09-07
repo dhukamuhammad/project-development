@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>College Lost & Found Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .line-clamp-4 {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(6px);
+        }
+
+        .dark .glass {
+            background: rgba(20, 20, 20, 0.45);
+        }
+
+        @keyframes floaty {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+    <div class="min-h-screen flex flex-col">
+
+        <!-- NAV -->
+        <nav class="w-full bg-gradient-to-r from-indigo-600 to-emerald-500 text-white">
+            <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-bold">LF</div>
+                    <div>
+                        <h1 class="font-bold">College Lost & Found</h1>
+                        <p class="text-xs opacity-90">Recover and return items — community powered</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button id="btnHeroToPortal"
+                        class="hidden md:inline-flex bg-white/20 hover:bg-white/30 px-3 py-2 rounded-md">Go to
+                        Portal</button>
+                    <button id="toggleDark" class="px-3 py-2 bg-white/20 hover:bg-white/30 rounded-md">Toggle</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- HERO -->
+        <header class="relative overflow-hidden">
+            <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-extrabold leading-tight">
+                        Found something? Lost something?<br />
+                        <span class="text-indigo-600 dark:text-indigo-400">Find it here.</span>
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-700 dark:text-gray-300">Community-driven Lost & Found portal —
+                        report items, search, and mark resolved. Built with HTML, TailwindCSS & JavaScript.</p>
+                    <div class="mt-6 flex gap-3">
+                        <a href="#portal"
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg shadow">Open
+                            Portal</a>
+                        <a href="#about" class="bg-white/20 hover:bg-white/30 text-white px-4 py-3 rounded-lg">About</a>
+                    </div>
+                </div>
+                <div class="rounded-2xl p-6 shadow-2xl glass animate-[floaty_6s_ease-in-out_infinite]">
+                    <h3 class="font-semibold">Recent reports</h3>
+                    <div id="miniList" class="mt-4 grid gap-3"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN -->
+        <main id="portal" class="max-w-6xl mx-auto px-6 py-12 w-full">
+
+            <!-- ABOUT -->
+            <section id="about" class="grid md:grid-cols-2 gap-8 items-center mb-12">
+                <div>
+                    <img src="https://dummyimage.com/600x360/eef2ff/606fda&text=Lost+%26+Found"
+                        class="rounded-xl shadow" />
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold">Why this portal?</h3>
+                    <p class="mt-3 text-gray-700 dark:text-gray-300">Students lose ID cards, pendrives, wallets — this
+                        portal helps them find it quickly. Even if your college has an app, this solves a different
+                        problem.</p>
+                    <ul class="mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>✔ Quick reporting & searching</li>
+                        <li>✔ Students help each other</li>
+                        <li>✔ Works offline in browser using localStorage</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- PORTAL -->
+            <section class="mb-10">
+                <div class="flex items-center justify-between gap-3 mb-4">
+                    <h2 class="text-2xl font-semibold">Portal</h2>
+                    <div class="flex items-center gap-3">
+                        <input id="search" type="search" placeholder="Search..." class="p-2 rounded-md glass w-64" />
+                        <select id="categoryFilter" class="p-2 rounded-md glass">
+                            <option value="all">All Categories</option>
+                            <option value="ID">ID Card</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Stationery">Stationery</option>
+                            <option value="Books">Books</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <select id="typeFilter" class="p-2 rounded-md glass">
+                            <option value="all">All</option>
+                            <option value="lost">Lost</option>
+                            <option value="found">Found</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                        <button id="openForm" class="px-3 py-2 rounded bg-indigo-600 text-white">+ Report</button>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- FORM -->
+                    <aside class="md:col-span-1">
+                        <div class="p-4 rounded-xl glass shadow-lg">
+                            <h3 class="font-semibold">Quick Report</h3>
+                            <form id="itemForm" class="mt-4 space-y-3" onsubmit="return false;">
+                                <select id="itemType" class="w-full p-2 rounded-md">
+                                    <option value="lost">Lost</option>
+                                    <option value="found">Found</option>
+                                </select>
+                                <input id="itemTitle" class="w-full p-2 rounded-md" placeholder="Title" required />
+                                <select id="itemCategory" class="w-full p-2 rounded-md">
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="ID">ID Card</option>
+                                    <option value="Books">Books</option>
+                                    <option value="Stationery">Stationery</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input id="itemDate" type="date" class="w-full p-2 rounded-md" />
+                                <textarea id="itemDesc" rows="3" class="w-full p-2 rounded-md"
+                                    placeholder="Details..."></textarea>
+                                <input id="itemContact" class="w-full p-2 rounded-md" placeholder="Contact info" />
+                                <input id="itemImage" type="file" accept="image/*" class="w-full text-sm" />
+                                <img id="previewImg" class="mt-2 max-w-full rounded-md shadow hidden" />
+                                <button id="submitItem"
+                                    class="px-4 py-2 rounded bg-emerald-500 text-white">Submit</button>
+                            </form>
+                        </div>
+                    </aside>
+
+                    <!-- BOARD -->
+                    <div class="md:col-span-2">
+                        <div id="board" class="grid md:grid-cols-2 gap-4"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESOLVED -->
+            <section class="mb-12">
+                <h3 class="text-xl font-semibold">Resolved Items</h3>
+                <div id="resolvedList" class="mt-4 grid md:grid-cols-3 gap-4"></div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="py-8 border-t border-gray-200 dark:border-gray-800">
+                <div class="max-w-6xl mx-auto px-6 text-center text-sm text-gray-600 dark:text-gray-300">
+                    Demo using localStorage • Made with ❤️
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        const KEY = 'lf_state_v1';
+        const itemForm = document.getElementById('itemForm');
+        const itemType = document.getElementById('itemType');
+        const itemTitle = document.getElementById('itemTitle');
+        const itemCategory = document.getElementById('itemCategory');
+        const itemDate = document.getElementById('itemDate');
+        const itemDesc = document.getElementById('itemDesc');
+        const itemContact = document.getElementById('itemContact');
+        const itemImage = document.getElementById('itemImage');
+        const previewImg = document.getElementById('previewImg');
+        const submitItem = document.getElementById('submitItem');
+        const board = document.getElementById('board');
+        const miniList = document.getElementById('miniList');
+        const search = document.getElementById('search');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const typeFilter = document.getElementById('typeFilter');
+        const resolvedList = document.getElementById('resolvedList');
+
+        let state = { items: [], resolved: [] };
+        function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+        function load() { const raw = localStorage.getItem(KEY); if (raw) state = JSON.parse(raw); }
+        function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+        function escapeHTML(s) { return s ? s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) : ''; }
+
+        itemImage.addEventListener('change', e => {
+            const file = e.target.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => { previewImg.src = reader.result; previewImg.classList.remove('hidden'); }
+            reader.readAsDataURL(file);
+        });
+
+        submitItem.addEventListener('click', () => {
+            const item = {
+                id: uid(), type: itemType.value, title: itemTitle.value, category: itemCategory.value,
+                date: itemDate.value, desc: itemDesc.value, contact: itemContact.value,
+                imageData: previewImg.src || '', created: new Date().toISOString()
+            };
+            state.items.push(item); save(); render(); itemForm.reset(); previewImg.classList.add('hidden');
+        });
+
+        function markResolved(id) {
+            const it = state.items.find(x => x.id === id);
+            if (it) { state.items = state.items.filter(x => x.id !== id); state.resolved.push(it); save(); render(); }
+        }
+        function deleteItem(id) {
+            state.items = state.items.filter(x => x.id !== id); save(); render();
+        }
+
+        function createCard(it) {
+            const el = document.createElement('div');
+            el.className = "p-4 rounded-xl shadow bg-white dark:bg-gray-800";
+            el.innerHTML = `
+        <div class="flex justify-between">
+          <div><span class="px-2 py-1 rounded text-xs ${it.type === 'lost' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">${it.type}</span>
+          <h4 class="font-semibold">${escapeHTML(it.title)}</h4></div>
+          <div class="flex gap-2">
+            <button class="resolve px-2 py-1 text-sm bg-indigo-600 text-white rounded">Resolve</button>
+            <button class="delete px-2 py-1 text-sm bg-red-500 text-white rounded">Delete</button>
+          </div>
+        </div>
+        <p class="mt-2 text-sm">${escapeHTML(it.desc)}</p>
+        ${it.contact ? `<p class="text-xs mt-1">Contact: ${escapeHTML(it.contact)}</p>` : ''}
+        ${it.imageData ? `<img src="${it.imageData}" class="mt-2 max-h-40 object-contain rounded"/>` : ''}`;
+            el.querySelector('.resolve').addEventListener('click', () => markResolved(it.id));
+            el.querySelector('.delete').addEventListener('click', () => deleteItem(it.id));
+            return el;
+        }
+
+        function render() {
+            board.innerHTML = ''; resolvedList.innerHTML = ''; miniList.innerHTML = '';
+            const q = (search.value || '').toLowerCase(); const cat = categoryFilter.value; const t = typeFilter.value;
+            state.items.forEach(it => {
+                if (cat !== 'all' && it.category !== cat) return;
+                if (t !== 'all' && it.type !== t) return;
+                if (q && !(it.title + it.desc + it.contact).toLowerCase().includes(q)) return;
+                board.appendChild(createCard(it));
+            });
+            state.resolved.forEach(it => {
+                const d = document.createElement('div');
+                d.className = "p-3 bg-gray-100 dark:bg-gray-700 rounded";
+                d.innerHTML = `<b>${escapeHTML(it.title)}</b> (${it.type})`;
+                resolvedList.appendChild(d);
+            });
+            state.items.slice(-3).forEach(it => {
+                const d = document.createElement('div');
+                d.className = "text-sm p-2 rounded glass"; d.textContent = `${it.type}: ${it.title}`;
+                miniList.appendChild(d);
+            });
+        }
+
+        search.addEventListener('input', render);
+        categoryFilter.addEventListener('change', render);
+        typeFilter.addEventListener('change', render);
+
+        document.getElementById('toggleDark').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        load(); render();
+    </script>
+</body>
+
+</html>
